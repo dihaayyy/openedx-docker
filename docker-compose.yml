@@ -25,7 +25,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:1.5.2
-    environment:
+    environment: 
       - "ES_JAVA_OPTS=-Xms1g -Xmx1g"
       - "cluster.name=openedx"
       - "bootstrap.memory_lock=true"
@@ -53,7 +53,7 @@ services:
       - ./data/rabbitmq:/var/lib/rabbitmq
 
   # Simple SMTP server
-  smtp:
+   smtp:
     image: namshi/smtp
     restart: unless-stopped
 
@@ -81,7 +81,7 @@ services:
     environment:
       SERVICE_VARIANT: lms
     restart: unless-stopped
-    volumes:
+  volumes:
       - ./config/openedx:/openedx/config
       - ./data/lms:/openedx/data
     depends_on:
@@ -119,10 +119,10 @@ services:
       context: ./openedx
     environment:
       SERVICE_VARIANT: lms
+      C_FORCE_ROOT: "1" # run celery tasks as root #nofear
     command: ./manage.py lms celery worker --loglevel=info --hostname=edx.lms.core.default.%%h --maxtasksperchild 100
     restart: unless-stopped
-    environment:
-      C_FORCE_ROOT: "1" # run celery tasks as root #nofear
+
     volumes:
       - ./config/openedx:/openedx/config
       - ./data/lms_worker:/openedx/data
@@ -135,10 +135,10 @@ services:
       context: ./openedx
     environment:
       SERVICE_VARIANT: cms
+      C_FORCE_ROOT: "1" # run celery tasks as root #nofear
     command: ./manage.py cms celery worker --loglevel=info --hostname=edx.cms.core.default.%%h --maxtasksperchild 100
     restart: unless-stopped
-    environment:
-      C_FORCE_ROOT: "1" # run celery tasks as root #nofear
+
     volumes:
       - ./config/openedx:/openedx/config
       - ./data/cms_worker:/openedx/data
@@ -169,3 +169,4 @@ services:
     command: ./manage.py run_consumer 12
     depends_on:
       - mysql
+
