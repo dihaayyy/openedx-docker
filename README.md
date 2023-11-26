@@ -1,7 +1,7 @@
 Kelompok 02:
 - Irwan Sadar Anugrah Zega (2210511014)
 - Bagus Tri Handoko (2210511025)
-- Muhammad Dihya Al Qalby (2210511035)
+- Muhammad Dihya Al Qalby (2210511033)
 - Muhammad Azkal Azkia (2210511038)
 
 # Open edX 1-click install for everyone
